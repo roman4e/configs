@@ -6,18 +6,40 @@ mkdir /home/user1/Hosting
 chmod 0700 /home/user1/Hosting
 ```
 There you will create hosting groups like 
-- Hosting/group1
-- Hosting/group2
+* Hosting/group1
+* Hosting/group2
 
 Each group is a place where sites are groupped with the same rights and php handle socket
 In each new group you _must_ create few subdirs:
-- .config
-- .tmp
-- .sess
-- .logs
+* .config
+* .tmp
+* .sess
+* .logs
 
 So next create in the Apache sites-available a new file 001-vhosts-user1.conf and links it to the sites-enabled
 Remember, you also must add any hostname into /etc/hosts file to access it locally if you do not use any configure DNS for the .local domain
+Rules file .htaccess is not dynamic and if you change it, reload apache2
+No recursive htaccess
+
+Available ${variables} for Hosting
+as Global
+* curuser - current username
+* suffix  - site domain suffix
+* hostingdir  - top hosting dir
+* APACHE2_HTTP_PORT
+* APACHE2_HTTPS_PORT
+
+
+in Group
+* curgroup    - group name
+* curpath     - path to group
+* logdir      - path to logs
+* PHPFCGISocketID - name of php socket
+* 
+
+inside .conf file
+* curname    - a name of host (without suffix if it used)
+* docroot    - host document root
 
 ```
 # username for the virtual hosts
@@ -58,3 +80,14 @@ Use VHostGroup group3
 Use EndVHostGroup
 
 Use EndHosting
+# No More Lines There!
+```
+
+Inside .conf file
+```
+# if want to add SSL host
+# put cert and key files into .config/cert directory
+Use VHostUseSSL
+
+Use XDebugEnable "anyidekey"
+```

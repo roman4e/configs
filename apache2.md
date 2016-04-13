@@ -1,6 +1,6 @@
 # apache2 configuration
 
-This configuration is for using PHP as apache module and fastcgi or proxy_fcgi
+This configuration is for using PHP as apache module and fastcgi or proxy_fastcgi
 
 create in the user1 home directory ~/Hosting
 ```
